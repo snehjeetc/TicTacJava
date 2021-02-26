@@ -1,4 +1,5 @@
 package tictactoe;
+import java.util.Scanner;
 
 public class TicTacToeGame{
     private char[] board;
@@ -13,4 +14,8 @@ public class TicTacToeGame{
     }
 
 
+    public void takeInputFromUser(Scanner sc){
+        System.out.println("Enter the character (X or O): ");
+        char input = sc.nextLine().charAt(0);
+    }
 }
