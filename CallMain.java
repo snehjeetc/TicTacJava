@@ -6,7 +6,7 @@ public class CallMain{
         TicTacToeGame obj = new TicTacToeGame();
         obj.createBoard();
         Scanner sc =new Scanner(System.in);
-        obj.takeInputFromUser(sc);
+        obj.setUserCharacter(sc);
 
     }
 }
