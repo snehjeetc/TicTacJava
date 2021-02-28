@@ -179,10 +179,34 @@ public class TicTacToeGame{
                     }
                     board[i][j] = ' ';
                 }
+            }
             if(nextMove.first != -1)
                 break;
-            }
         }
+
+        if(nextMove.first != -1){
+            board[nextMove.first][nextMove.second] = computerChar;
+            return;
+        }
+
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                if(board[i][j] == ' '){
+                    board[i][j] = playerChar;
+                    int res = checkWinner();
+                    if(res == 1){
+                        nextMove.first = i;
+                        nextMove.second = j;
+                        board[i][j] = ' ';
+                        break;
+                    }
+                    board[i][j] = ' ';
+                }
+            }
+            if(nextMove.first != -1)
+                break;
+        }
+
         if(nextMove.first != -1){
             board[nextMove.first][nextMove.second] = computerChar;
             return;
