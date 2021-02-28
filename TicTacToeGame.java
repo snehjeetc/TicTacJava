@@ -14,6 +14,12 @@ public class TicTacToeGame{
         computerChar = ' ';
     }
 
+    public void reset(){
+       this.createBoard(); 
+       playerChar = ' ';
+       computerChar = ' ';
+    }
+
     public void createBoard(){
         for(int i=0; i<3; i++)
             for(int j=0; j<3; j++)
@@ -250,7 +256,7 @@ public class TicTacToeGame{
             return true;
         }
         if(board[2][2] == ' '){
-            board[2][0] = computerChar;
+            board[2][2] = computerChar;
             return true;
         }
         return false;
