@@ -26,13 +26,13 @@ public class TicTacToeGame{
                     if( board[count] == ' ')
                         System.out.print(" " + count + " ");
                     else
-                        System.out.print(" " + board[i] + " ");
+                        System.out.print(" " + board[count] + " ");
                 }
                 else{
                     if( board[count] == ' ' )
                         System.out.print("| " + count + " |");
                     else
-                        System.out.print("| " + board[i] + " |");
+                        System.out.print("| " + board[count] + " |");
                         
                 }
                 count++;
@@ -63,5 +63,6 @@ public class TicTacToeGame{
             pos = sc.nextInt();
             sc.nextLine();
         }
+        board[pos] = userChar;
     }
 }
