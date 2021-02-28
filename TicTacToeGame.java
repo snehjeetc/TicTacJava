@@ -4,9 +4,6 @@ import java.util.Random;
 
 public class TicTacToeGame{
 
-    private static final String player = "Player";
-    private static final String computer = "Computer";
-
     private char[][] board;
     private char playerChar;
     private char computerChar;
@@ -65,57 +62,74 @@ public class TicTacToeGame{
         return p;
     }
 
-    public boolean checkWinner(String user){
-        if(player.equals(user)){
-           return checkWinner(playerChar); 
+    private boolean anyMoveLeft(){
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                if(board[i][j] == ' ')
+                    return true;
+            }
         }
-        else
-            return checkWinner(computerChar);
+        return false;
     }
 
-    private boolean checkWinner(char filler){
+    public int checkWinner(){
         //Horizontal check
+        char winner = ' ';
         for(int i=0; i<3; i++){
-            if(board[i][0] == board[i][1] && board[i][0] == board[i][2] 
-                    && board[i][0] == filler)
-                return true;
+            if(board[i][0] == board[i][1] && board[i][0] == board[i][2]){
+                winner = board[i][0];
+                if(winner == playerChar)
+                    return 1;
+                else if(winner == computerChar)
+                    return -1;
+            }
         }
 
         //Vertical check
         for(int j=0; j<3; j++){
-            if(board[0][j] == board[1][j] && board[0][j] == board[2][j]
-                   && board[0][j] == filler)
-               return true; 
+            if(board[0][j] == board[1][j] && board[0][j] == board[2][j]){
+                winner = board[0][j];
+                if(winner == playerChar)
+                    return 1;
+                else if(winner == computerChar)
+                    return -1;
+            }
         }
 
         //Diagonal checks
         //towards left
-        if(board [0][0] == filler){
-            boolean res = true;
-            for(int i=1; i<3; i++){
-                if( board[i][i] != filler){
-                    res = false;
-                    break;
-                }
+        boolean res = true;
+        for(int i=1; i<3; i++){
+            if( board[i][i] != board[0][0] ){
+                res = false;
+                break;
             }
-            if(res == true)
-                return true;
+        }
+        if(res == true){
+            winner = board[0][0];
+            if(winner == playerChar)
+                return 1;
+            else if(winner == computerChar)
+                return -1;
         }
         
         //Diagonal check
         //towards right
-        if(board [0][2] == filler){
-            boolean res = true;
-            for(int i=1,j=1; i<3 && j>=0 ; i++,j--){
-                if( board[i][j] != filler){
-                    res = false;
-                    break;
-                }
+        res = true;
+        for(int i=1,j=1; i<3 && j>=0 ; i++,j--){
+            if( board[i][j] != board[0][2] ){
+                res = false;
+                break;
             }
-            if(res == true)
-                return true;
         }
-        return false;
+        if(res == true){
+            winner = board[0][2];
+            if(winner == playerChar)
+                return 1;
+            else if(winner == computerChar)
+                return -1;
+        }
+        return 0;
     }
 
     public void choosePosition(Scanner sc){
@@ -148,6 +162,31 @@ public class TicTacToeGame{
             return true;
         else
             return false;
+    }
+
+    public void computerMove(){
+        Pair nextMove = new Pair(-1, -1);
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                if(board[i][j]==' '){
+                    board[i][j] = computerChar;
+                    int res = checkWinner();
+                    if(res == -1){
+                        nextMove.first = i;
+                        nextMove.second = j;
+                        board[i][j] = ' ';
+                        break;
+                    }
+                    board[i][j] = ' ';
+                }
+            if(nextMove.first != -1)
+                break;
+            }
+        }
+        if(nextMove.first != -1){
+            board[nextMove.first][nextMove.second] = computerChar;
+            return;
+        }
     }
 }
 
