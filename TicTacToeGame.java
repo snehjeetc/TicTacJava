@@ -8,6 +8,8 @@ public class TicTacToeGame{
 
     TicTacToeGame(){
         board = new char[10];
+        userChar = ' ';
+        computerChar = ' ';
     }
 
     public void createBoard(){
@@ -46,9 +48,20 @@ public class TicTacToeGame{
         computerChar = (userChar == 'X') ?  'O' : 'X' ; 
     }
     
-    public void choosePosition(){
+    public void choosePosition(Scanner sc){
         System.out.println("Choose position (showing board): ");
         this.putBoardForPosition();
+        System.out.println(": ");
+        int pos = sc.nextInt();
+        sc.nextLine();
+        while( (pos < 1 || pos > 9) || board[pos] != ' '){
+            if(pos < 1 || pos > 9)
+                System.out.println("Input out of bound"); 
+            else
+                System.out.println("The position is already filled");
+            System.out.println("Enter the position again: ");
+            pos = sc.nextInt();
+            sc.nextLine();
+        }
     }
-
 }

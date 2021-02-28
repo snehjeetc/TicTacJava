@@ -7,6 +7,7 @@ public class CallMain{
         obj.createBoard();
         Scanner sc =new Scanner(System.in);
         obj.setUserCharacter(sc);
+        obj.choosePosition(sc);
 
     }
 }
