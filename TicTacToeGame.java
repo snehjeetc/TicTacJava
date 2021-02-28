@@ -211,6 +211,28 @@ public class TicTacToeGame{
             board[nextMove.first][nextMove.second] = computerChar;
             return;
         }
+
+        boolean success= this.takeAvailableCorners();
+    }
+
+    private boolean takeAvailableCorners(){
+        if(board[0][0] == ' '){
+            board[0][0] = computerChar;
+            return true;
+        }
+        if(board[0][2] == ' '){
+            board[0][2] = computerChar;
+            return true;
+        }
+        if(board[2][0] == ' '){
+            board[2][0] = computerChar;
+            return true;
+        }
+        if(board[2][2] == ' '){
+            board[2][0] = computerChar;
+            return true;
+        }
+        return false;
     }
 }
 
