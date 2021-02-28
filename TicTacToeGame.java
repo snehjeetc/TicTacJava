@@ -1,5 +1,6 @@
 package tictactoe;
 import java.util.Scanner;
+import java.util.Random;
 
 public class TicTacToeGame{
     private char[] board;
@@ -64,5 +65,17 @@ public class TicTacToeGame{
             sc.nextLine();
         }
         board[pos] = userChar;
+    }
+
+    public boolean toss(Scanner sc){
+        System.out.println("Choose 1/0 : ");
+        int user = sc.nextInt();
+        sc.nextLine();
+        Random rand = new Random();
+        int ran_num = rand.nextInt(2);
+        if( user == ran_num)
+            return true;
+        else
+            return false;
     }
 }
