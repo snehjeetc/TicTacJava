@@ -20,6 +20,20 @@ public class TicTacToeGame{
                 board[i][j] = ' ';
     }
 
+    public void putBoardState(){
+        System.out.println("-------------");
+        for(int i=0; i<3; i++){
+            for(int j=0; j<3; j++){
+                if(j == 1 || j == 3)
+                    System.out.print(" " + board[i][j] + " ");
+                else
+                    System.out.print("| " + board[i][j] + " |");
+            }
+            System.out.println();
+            System.out.println("-------------");
+        }
+    }
+
     private void putBoardForPosition(){
         int count = 1;
         System.out.println("-------------");
@@ -62,7 +76,7 @@ public class TicTacToeGame{
         return p;
     }
 
-    private boolean anyMoveLeft(){
+    public boolean anyMoveLeft(){
         for(int i=0; i<3; i++){
             for(int j=0; j<3; j++){
                 if(board[i][j] == ' ')
@@ -213,6 +227,13 @@ public class TicTacToeGame{
         }
 
         boolean success= this.takeAvailableCorners();
+        if(!success){
+            if(board[1][1] == ' '){
+                board[1][1] = computerChar;
+                return;         
+            }
+            takeAvailableSides();
+        }
     }
 
     private boolean takeAvailableCorners(){
@@ -233,6 +254,22 @@ public class TicTacToeGame{
             return true;
         }
         return false;
+    }
+
+    private void takeAvailableSides(){
+        for(int j = 0; j < 3; j++){
+            if(board[1][j] == ' '){
+                board[1][j] = computerChar;
+                return;
+            }
+        }
+
+        for(int i = 0; i < 3; i++){
+            if(board[i][1] == ' '){
+                board[i][1] = computerChar;
+                return;
+            }
+        }
     }
 }
 
